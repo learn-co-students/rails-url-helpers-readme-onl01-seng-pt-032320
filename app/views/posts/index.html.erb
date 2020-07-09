@@ -1,0 +1,20 @@
+#example of over doing it with code
+<% @posts.each do |post| %>
+    <div><a href='<%= "/post/#{post.id}" %>'><%= post.title %></a></div>
+<% end %>
+
+#What you want to do
+<% @posts.each do |post| %>
+    <div><%= link_to post.title, "/posts/#{post.id}" %></div>
+<% end %>
+
+
+#but this is even better
+<% @posts.each do |post| %>
+    <div><%= link_to post.title, post_path(post.id) %></div>
+<% end %>
+
+#One more time refactoring....rails will know what when you pass in post argument..it bases it by id already
+<% @posts.each do |post| %>
+    <div><%= link_to post.title, post_path(post) %></div>
+<% end %>
